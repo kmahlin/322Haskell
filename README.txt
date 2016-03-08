@@ -9,3 +9,9 @@ How to run this stuff.
     - or something like, :main /pathtofile
 
 that should do it for now.
+
+
+
+4) to reload the ghci terminal after a change was made
+  - :load csce322homework03part01.hs
+  - or :load /pathtofile
