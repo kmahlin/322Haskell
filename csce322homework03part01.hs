@@ -20,15 +20,32 @@ onePlayerOneRotation maze move
   | move == "180" = oneHundredEightyRotation (maze)
   | otherwise     = ["wrong"]
 
--- movePlayer :: [[Char]] -> [[Char]]
--- movePlayer maze
 
 
-clockwiseRotation :: [[Char]] -> [[Char]]
-clockwiseRotation maze =  (transpose . reverse) maze
+-- move player
+movePlayer :: Char -> [Char] -> [Char]
+movePlayer player maze
+  |  playerMovable = maze -- -- swap move player
+  | otherwise = ['n','o'] -- todo change this, atm just for debugging
+  where
+    playerMovable = isMovable position maze
+    position      = (head (findPlayerIndex player maze))
 
-counterClockwiseRotation :: [[Char]] -> [[Char]]
-counterClockwiseRotation maze = (reverse . transpose) maze
 
-oneHundredEightyRotation :: [[Char]] -> [[Char]]
-oneHundredEightyRotation maze = clockwiseRotation(clockwiseRotation(maze))
+
+
+-- I want to say, if dash, move, if x stop
+-- you would give it a player position, and as if the next space is open
+isMovable :: Int -> [Char] -> Bool
+isMovable pos maze
+  | valueAtIndex (pos + 1) maze == '-' = True
+  | valueAtIndex (pos + 1) maze == 'g' = True
+  | otherwise = False
+
+
+swap :: Int -> Int -> [Int] -> [Int]
+swap _ _ [] = []
+swap n m (x:xs)
+  | n == x = m : (swap n m xs)
+  | m == x = n : (swap n m xs)
+  | otherwise = x : (swap n m xs)
