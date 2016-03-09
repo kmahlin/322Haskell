@@ -2,7 +2,6 @@ import Prelude
 import System.Environment ( getArgs )
 import Data.List
 import Helpers
-import Debug.Trace
 
 -- The main method that will be used for testing / command line access
 main = do
@@ -30,8 +29,6 @@ movePlayer player maze
   where
     playerMovable = isMovable position maze
     position      = (head (findPlayerIndex player maze))
-
-
 
 
 -- I want to say, if dash, move, if x stop
