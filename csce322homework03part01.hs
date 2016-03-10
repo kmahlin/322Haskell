@@ -49,9 +49,15 @@ move player (he:ta)
   where
     movable = isMovable 0 (he:ta)
 
-
-
-
+-- Get all players
+getPlayers :: [Char] -> [Char] -> [Char]
+getPlayers arr [] = arr
+getPlayers arr (he:ta)
+  | he == '1' =  getPlayers ('1' :  arr) ta
+  | he == '2' =  getPlayers ('2' :  arr) ta
+  | he == '3' =  getPlayers ('3' :  arr) ta
+  | he == '4' =  getPlayers ('4' :  arr) ta
+  | otherwise =  getPlayers  arr ta
 
 swap :: Int -> Int -> [Int] -> [Int]
 swap _ _ [] = []
