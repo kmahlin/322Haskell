@@ -14,8 +14,8 @@ main = do
 -- YOUR CODE SHOULD COME AFTER THIS POINT
 onePlayerOneRotation :: [[Char]] -> [Char] -> [[Char]]
 onePlayerOneRotation maze move
-  | move == "c"   = recombine cols (flatten c)
-  | move == "cc"  = cc
+  | move == "c"   = makeMove c
+  | move == "cc"  = makeMove cc
   | move == "180" = makeMove oneEighty
   | otherwise     = error "bad move"
   where
@@ -25,15 +25,12 @@ onePlayerOneRotation maze move
     cols      = length (head maze)
 
 
-
-
---take the rotated maze, rotate cc
---flatten maze
--- TODO get the player array going for multiple players
--- move player
--- recombine maze
--- rotate maze c
---
+-- This method has a lot going on. What it does is :
+-- takes a roated maze, then rotates it counterClockwiseRotation so cols are now rows
+-- then flattens the maze (2d -> 1d), moves every player in the maze
+-- then recombines (1d -> 2d) maze, splits the 1d based on col value
+-- then rotates the 2d maze back to orginal position
+-- returns maze
 makeMove :: [[Char]] -> [[Char]]
 makeMove maze = clockwiseRotation (recombine cols (moveAllPlayers playerOrd ccFlatten))
   where
@@ -42,7 +39,7 @@ makeMove maze = clockwiseRotation (recombine cols (moveAllPlayers playerOrd ccFl
     cols      = length (head cc)
     playerOrd =  getPlayersOrd [] ccFlatten
 
-
+--recombines (1d -> 2d) maze, splits the 1d based on int value
 recombine :: Int -> [Char] -> [[Char]]
 recombine _ [] = []
 recombine cut maze
@@ -61,11 +58,13 @@ isMovable pos maze
   | valueAtIndex (pos + 1) maze == 'g' = True
   | otherwise = False
 
---TODO make a moveAllPlayers
+
 -- takes a flattened array
 -- will use movePlayer, but will take a [char], return [char]
+-- Takes an empty list and a  flattned maze
+-- retruns a list of all players on the board
 moveAllPlayers :: [Char] -> [Char] -> [Char]
-moveAllPlayers [] maze         = maze
+moveAllPlayers [] maze        = maze
 moveAllPlayers (he:ta) maze   = moveAllPlayers ta (movePlayer he maze)
 
 
@@ -81,7 +80,8 @@ movePlayer player (he:ta)
   where
     movable = isMovable 0 (he:ta)
 
--- returns a list of players, lowest player is first
+-- returns a list of players in the maze, lowest player is first
+-- Number of players in the game is 1 -4 inclusive
 getPlayersOrd :: [Char] -> [Char] -> [Char]
 getPlayersOrd arr [] = arr
 getPlayersOrd arr (he:ta)
