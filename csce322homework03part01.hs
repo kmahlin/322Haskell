@@ -40,6 +40,19 @@ isMovable pos maze
   | otherwise = False
 
 
+--just moves player 1 atm
+move :: [Char] -> [Char]
+move [] = []
+move (he:ta)
+  | he == '1' && movable  = '-' : move ( '1': tail ta )
+  | otherwise             = he : move ta -- whill mess up if two players
+  where
+    movable = isMovable 0 (he:ta)
+
+
+
+
+
 swap :: Int -> Int -> [Int] -> [Int]
 swap _ _ [] = []
 swap n m (x:xs)
