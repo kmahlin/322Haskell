@@ -25,3 +25,7 @@ notes
 
 under windows, to clear ghci term command
 :! cls
+
+
+
+:main testFiles/part01/part01test01.g

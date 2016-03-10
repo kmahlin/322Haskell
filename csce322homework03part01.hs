@@ -26,11 +26,11 @@ onePlayerOneRotation maze move
 
 
 -- This method has a lot going on. What it does is :
--- takes a roated maze, then rotates it counterClockwiseRotation so cols are now rows
--- then flattens the maze (2d -> 1d), moves every player in the maze
--- then recombines (1d -> 2d) maze, splits the 1d based on col value
+-- takes a maze, then rotates it counterClockwiseRotation so cols are now rows
+-- then flattens the maze (2d -> 1d), and moves every player in the flattened maze
+-- then recombines (1d -> 2d) maze, which splits the 1d based on col value
 -- then rotates the 2d maze back to orginal position
--- returns maze
+-- returns 2d maze
 makeMove :: [[Char]] -> [[Char]]
 makeMove maze = clockwiseRotation (recombine cols (moveAllPlayers playerOrd ccFlatten))
   where
@@ -38,6 +38,7 @@ makeMove maze = clockwiseRotation (recombine cols (moveAllPlayers playerOrd ccFl
     ccFlatten = flatten (cc)
     cols      = length (head cc)
     playerOrd =  getPlayersOrd [] ccFlatten
+
 
 --recombines (1d -> 2d) maze, splits the 1d based on int value
 recombine :: Int -> [Char] -> [[Char]]
@@ -51,13 +52,6 @@ recombine cut maze
 flatten :: [[Char]] -> [Char]
 flatten maze =  concat(maze)
 
--- checks if position + 1 is a movable position for a player
-isMovable :: Int -> [Char] -> Bool
-isMovable pos maze
-  | valueAtIndex (pos + 1) maze == '-' = True
-  | valueAtIndex (pos + 1) maze == 'g' = True
-  | otherwise = False
-
 
 -- takes a flattened array
 -- will use movePlayer, but will take a [char], return [char]
@@ -70,15 +64,15 @@ moveAllPlayers (he:ta) maze   = moveAllPlayers ta (movePlayer he maze)
 
 
 --move player forward
--- TODO account for stopping at g
 -- returns a maze of the moved player
 movePlayer :: Char -> [Char] -> [Char]
 movePlayer _ [] = []
-movePlayer player (he:ta)
-  | he == player && movable  = '-' : movePlayer player ( player : tail ta )
-  | otherwise                = he  : movePlayer player ta
+movePlayer player  (he:ta)
+  | he == player && val == '-'   = '-' : movePlayer player ( player : tail ta )
+  | he == player && val == 'g'   = '-' : he : movePlayer player ( tail ta)
+  | otherwise                    = he  : movePlayer player ta
   where
-    movable = isMovable 0 (he:ta)
+    val = valueAtIndex 1 (he:ta)
 
 -- returns a list of players in the maze, lowest player is first
 -- Number of players in the game is 1 -4 inclusive

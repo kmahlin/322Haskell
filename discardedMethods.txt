@@ -1,0 +1,37 @@
+move :: [Char] -> [Char]
+move [] = []
+move (he:ta)
+  | he == '1' && movable  = '-' : move ( '1': tail ta )
+  | he == 'x'             = he  : move ta
+  | he == '-'             = he  : move ta
+  | he == 'g'             = he  : move ta
+  | otherwise             = he : move ta -- whill mess up if two players
+  where
+    movable = isMovable 0 (he:ta)
+
+
+
+
+
+-- move player
+--movePlayer :: Char -> [Char] -> [Char]
+--movePlayer player maze
+--  |  playerMovable = maze -- -- swap move player
+--  | otherwise = ['n','o'] -- todo change this, atm just for debugging
+--  where
+--    playerMovable = isMovable position maze
+--    position      = (head (findPlayerIndex player maze))
+
+
+
+"x x x x x x x x x x x x x x x x x"
+
+
+
+-- checks if position + 1 is a movable position for a player
+isMovable :: Int -> [Char] -> Bool
+isMovable pos  maze
+  | val == '-'  = True
+  | otherwise   = False
+  where
+    val = valueAtIndex (pos + 1) maze
