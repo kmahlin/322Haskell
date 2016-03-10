@@ -16,8 +16,8 @@ onePlayerOneRotation :: [[Char]] -> [Char] -> [[Char]]
 onePlayerOneRotation maze move
   | move == "c"   = recombine cols (flatten c)
   | move == "cc"  = cc
-  | move == "180" = recombine cols (flatten oneEighty)
-  | otherwise     = ["wrong"]
+  | move == "180" = makeMove oneEighty
+  | otherwise     = error "bad move"
   where
     c         = clockwiseRotation (maze)
     cc        = counterClockwiseRotation (maze)
@@ -27,6 +27,20 @@ onePlayerOneRotation maze move
 
 
 
+--take the rotated maze, rotate cc
+--flatten maze
+-- TODO get the player array going for multiple players
+-- move player
+-- recombine maze
+-- rotate maze c
+--
+makeMove :: [[Char]] -> [[Char]]
+makeMove maze = clockwiseRotation (recombine cols (moveAllPlayers playerOrd ccFlatten))
+  where
+    cc        = counterClockwiseRotation (maze)
+    ccFlatten = flatten (cc)
+    cols      = length (head cc)
+    playerOrd =  getPlayersOrd [] ccFlatten
 
 
 recombine :: Int -> [Char] -> [[Char]]
@@ -47,9 +61,18 @@ isMovable pos maze
   | valueAtIndex (pos + 1) maze == 'g' = True
   | otherwise = False
 
+--TODO make a moveAllPlayers
+-- takes a flattened array
+-- will use movePlayer, but will take a [char], return [char]
+moveAllPlayers :: [Char] -> [Char] -> [Char]
+moveAllPlayers [] maze         = maze
+moveAllPlayers (he:ta) maze   = moveAllPlayers ta (movePlayer he maze)
+
+
 
 --move player forward
 -- TODO account for stopping at g
+-- returns a maze of the moved player
 movePlayer :: Char -> [Char] -> [Char]
 movePlayer _ [] = []
 movePlayer player (he:ta)
