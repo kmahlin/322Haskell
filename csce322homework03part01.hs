@@ -41,11 +41,11 @@ isMovable pos maze
 
 
 --just moves player 1 atm
-move :: [Char] -> [Char]
-move [] = []
-move (he:ta)
-  | he == '1' && movable  = '-' : move ( '1': tail ta )
-  | otherwise             = he : move ta -- whill mess up if two players
+move :: Char -> [Char] -> [Char]
+move _ [] = []
+move player (he:ta)
+  | he == player && movable  = '-' : move player ( player : tail ta )
+  | otherwise                = he : move player ta
   where
     movable = isMovable 0 (he:ta)
 
