@@ -13,12 +13,22 @@ main = do
 
 -- YOUR CODE SHOULD COME AFTER THIS POINT
 onePlayerManyRotations :: [[Char]] -> [[Char]] -> [[Char]]
-onePlayerManyRotations maze moves = maze
-  | move == "c"   = makeMove c
-  | move == "cc"  = makeMove cc
-  | move == "180" = makeMove oneEighty
-  | otherwise     = error "bad move"
-where
-  c         = clockwiseRotation (maze)
-  cc        = counterClockwiseRotation (maze)
-  oneEighty = oneHundredEightyRotation (maze)
+onePlayerManyRotations maze [] = maze
+onePlayerManyRotations maze (he:ta)
+  | he == "c"   = onePlayerManyRotations (makeMove c) ta
+  | he == "cc"  = onePlayerManyRotations (makeMove cc) ta
+  | he == "180" = onePlayerManyRotations (makeMove oneEighty) ta
+  | otherwise   = error "bad move"
+  where
+    c         = clockwiseRotation (maze)
+    cc        = counterClockwiseRotation (maze)
+    oneEighty = oneHundredEightyRotation (maze)
+
+--movePlayer :: Char -> [Char] -> [Char]
+--movePlayer _ [] = []
+--movePlayer player  (he:ta)
+--  | he == player && val == '-'   = '-' : movePlayer player ( player : tail ta )
+--  | he == player && val == 'g'   = '-' : he : movePlayer player ( tail ta)
+--  | otherwise                    = he  : movePlayer player ta
+--  where
+--    val = valueAtIndex 1 (he:ta)
