@@ -26,11 +26,21 @@ makeAllRotation :: [[Char]] -> [[Char]] -> [[Char]]
 -- take maze moves goalbool -> return maze
 makeAllRotation maze []  = maze
 makeAllRotation maze (he:ta)
-  | he == "c"    = makeAllRotation (makeMove c) ta
-  | he == "cc"   = makeAllRotation (makeMove cc) ta
-  | he == "180"  = makeAllRotation (makeMove oneEighty) ta
-  | otherwise    = error "bad move"
+  | inGoal == True = maze
+  | he == "c"      = makeAllRotation (makeMove c) ta
+  | he == "cc"     = makeAllRotation (makeMove cc) ta
+  | he == "180"    = makeAllRotation (makeMove oneEighty) ta
+  | otherwise      = error "bad move"
   where
     c         = clockwiseRotation (maze)
     cc        = counterClockwiseRotation (maze)
     oneEighty = oneHundredEightyRotation (maze)
+    inGoal    = isGoal maze
+
+
+isGoal :: [[Char]] -> Bool
+isGoal maze
+  | elem 'g' fMaze = False
+  | otherwise      = True
+  where
+    fMaze = flatten maze
