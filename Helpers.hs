@@ -5,6 +5,7 @@ module Helpers
 , counterClockwiseRotation
 , flatten
 , getPlayersOrd
+, isGoal
 , makeMove
 , moveAllPlayers
 , movePlayer
@@ -49,6 +50,14 @@ getPlayersOrd arr (he:ta)
  | he == '3' =  getPlayersOrd ('3' :  arr) ta
  | he == '4' =  getPlayersOrd ('4' :  arr) ta
  | otherwise =  getPlayersOrd  arr ta
+
+-- checks if a 'g' value exists in the maze
+isGoal :: [[Char]] -> Bool
+isGoal maze
+ | elem 'g' fMaze = False
+ | otherwise      = True
+ where
+   fMaze = flatten maze
 
 
 -- This method has a lot going on. What it does is :

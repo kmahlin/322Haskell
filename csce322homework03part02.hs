@@ -36,11 +36,3 @@ makeAllRotation maze (he:ta)
     cc        = counterClockwiseRotation (maze)
     oneEighty = oneHundredEightyRotation (maze)
     inGoal    = isGoal maze
-
-
-isGoal :: [[Char]] -> Bool
-isGoal maze
-  | elem 'g' fMaze = False
-  | otherwise      = True
-  where
-    fMaze = flatten maze
