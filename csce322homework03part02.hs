@@ -17,12 +17,19 @@ main = do
 
 
 onePlayerManyRotations :: [[Char]] -> [[Char]] -> [[Char]]
-onePlayerManyRotations maze [] = maze
-onePlayerManyRotations maze (he:ta)
-  | he == "c"   = onePlayerManyRotations (makeMove c) ta
-  | he == "cc"  = onePlayerManyRotations (makeMove cc) ta
-  | he == "180" = onePlayerManyRotations (makeMove oneEighty) ta
-  | otherwise   = error "bad move"
+onePlayerManyRotations maze moves = makeAllRotation maze moves
+
+
+
+-- maybe make a MakeAllRotation function
+makeAllRotation :: [[Char]] -> [[Char]] -> [[Char]]
+-- take maze moves goalbool -> return maze
+makeAllRotation maze []  = maze
+makeAllRotation maze (he:ta)
+  | he == "c"    = makeAllRotation (makeMove c) ta
+  | he == "cc"   = makeAllRotation (makeMove cc) ta
+  | he == "180"  = makeAllRotation (makeMove oneEighty) ta
+  | otherwise    = error "bad move"
   where
     c         = clockwiseRotation (maze)
     cc        = counterClockwiseRotation (maze)
