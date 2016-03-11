@@ -12,10 +12,6 @@ main = do
      printMaze (onePlayerManyRotations maze moves)
 
 -- YOUR CODE SHOULD COME AFTER THIS POINT
-
---TODO once a player hits the goal, game is over
-
-
 onePlayerManyRotations :: [[Char]] -> [[Char]] -> [[Char]]
 onePlayerManyRotations maze []  = maze
 onePlayerManyRotations maze (he:ta)
