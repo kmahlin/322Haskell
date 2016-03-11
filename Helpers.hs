@@ -85,7 +85,7 @@ movePlayer player  (he:ta)
   where
     val = valueAtIndex 1 (he:ta)
 
-
+-- rotate a 2d array 180 degrees
 oneHundredEightyRotation :: [[Char]] -> [[Char]]
 oneHundredEightyRotation maze = clockwiseRotation(clockwiseRotation(maze))
 
