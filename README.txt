@@ -12,3 +12,35 @@ To run:
 Load a Haskell File (i.e. csce322homework03part01)
 Type, :main /testFiles/part01/part01test01.g
 
+
+
+A maze would look like:
+
+"xxxxxxxxxxxxxxxxxxxx",
+"x---x----x---x-----x",
+"x----x--x----------x",
+"x------------x-----x",
+"x-------xx-----x---x",
+"xx------x--------1-x",
+"xg----------x--xx--x",
+"x------x-----x-----x",
+"x------------------x",
+"x-x------xx---xx--xx",
+"x-xx-x--x----------x",
+"x------x-x--------xx",
+"x-------------x---xx",
+"x----x-xx---x------x",
+"x---------------x--x",
+"xx---xx-----x----x-x",
+"x------------x-----x",
+"xxxxxxxxxxxxxxxxxxxx"
+
+
+Rotations Look like:
+
+"180",
+"c",
+"cc",
+
+Where c and cc are clockwise and counter-clockwise moves
+
