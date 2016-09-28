@@ -4,7 +4,12 @@ Gravity Maze!
 
 This project completes the Haskell assignment for CSCE 322 at UNL.
 
-The object of this program is to take a maze with players, and rotate that maze a given number of times (set in the test file).  If a player reaches the goal of the maze they have won the game.
+The object of this program is to take a maze with player(s), and rotate that maze a given number of times (set in the test file).  If a player reaches the goal of the maze they have won the game.
+
+This Assignment is comprised of 3 parts:
+Part01 - One player and only one move is made.
+Part02 - One player and multiple moves are made.
+Part03 - Multiple players and multiple moves are made.
 
 
 To run:
