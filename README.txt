@@ -1,31 +1,14 @@
-How to run this stuff.
+TODO: update this readme
 
-1)I'm using the haskell platform d/l from the haskell website. It just installs.
-2)I double click on the .hs file I want to run, the installed haskell platform will run the file in it's interpreter
-3) to run csce322homework03part01
-  - double click on the haskell file from the window browser
-  - type:
-    - :main part01test01.g
-    - or something like, :main /pathtofile
+Gravity Maze!
 
-that should do it for now.
+This project completes the Haskell assignment for CSCE 322 at UNL.
+
+The object of this program is to take a maze with players, and rotate that maze a given number of times (set in the test file).  If a player reaches the goal of the maze they have won the game.
 
 
+To run:
 
-4) to reload the ghci terminal after a change was made
-  - :load csce322homework03part01.hs
-  - or :load /pathtofile
+Load a Haskell File (i.e. csce322homework03part01)
+Type, :main /testFiles/part01/part01test01.g
 
-
-
-
-
----------
-notes
-
-under windows, to clear ghci term command
-:! cls
-
-
-
-:main testFiles/part01/part01test01.g
