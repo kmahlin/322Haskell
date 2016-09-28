@@ -42,5 +42,5 @@ Rotations Look like:
 "c",
 "cc",
 
-Where c and cc are clockwise and counter-clockwise moves
+Where c and cc are clockwise and counter-clockwise moves respectively.
 
